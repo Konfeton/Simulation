@@ -1,6 +1,7 @@
 package com.onkonfeton;
 
 import com.onkonfeton.action.*;
+import com.onkonfeton.entity.moveable.Herbivore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ public class Simulation {
     private final Renderer renderer;
     private final List<Action> initActions = new ArrayList<>();
     private final List<Action> turnActions = new ArrayList<>();
+    private boolean isRunning = true;
 
 
     public Simulation(WorldMap map, Renderer renderer) {
@@ -18,9 +20,11 @@ public class Simulation {
         this.renderer = renderer;
         init();
     }
+    
 
     public void startInfinite() {
-        while(true){
+        isRunning = true;
+        while(isRunning){
             makeTurn();
             sleep(1000);
         }
@@ -33,15 +37,14 @@ public class Simulation {
         turnCounter++;
         renderer.render(map);
 
-        System.out.println("Ход номер: " + turnCounter);
-
+        System.out.println("Номер хода: " + turnCounter);
     }
 
     private void sleep(long millis) {
         try {
             Thread.sleep(millis);
         } catch (InterruptedException ignored) {
-
+            isRunning = false;
         }
     }
 
@@ -61,5 +64,9 @@ public class Simulation {
         for (Action action : initActions) {
             action.perform(map);
         }
+    }
+
+    public boolean isOver() {
+        return map.getEntitiesOfType(Herbivore.class).keySet().isEmpty();
     }
 }

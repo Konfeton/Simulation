@@ -22,16 +22,16 @@ public class Main {
 
         while (true) {
             System.out.println("Добро пожаловать в симуляцию!");
-            System.out.printf("%s) Создать новую симуляцию",COMMAND_CREATE_NEW_SIMULATION );
-            System.out.printf("%s) Выйти", COMMAND_EXIT_FROM_MENU);
+            System.out.printf("%s) Создать новую симуляцию\n",COMMAND_CREATE_NEW_SIMULATION );
+            System.out.printf("%s) Выйти\n", COMMAND_EXIT_FROM_MENU);
             System.out.print("Выбор: ");
 
             WorldMap map;
 
             switch (scanner.nextLine()) {
                 case COMMAND_CREATE_NEW_SIMULATION -> {
-                    MapConfigurer mapConfigurer = new MapConfigurer();
-                    map = mapConfigurer.configure();
+                    MapConfigurator mapConfigurator = new MapConfigurator();
+                    map = mapConfigurator.createMap();
                     simulationMenu(map);
                 }
                 case COMMAND_EXIT_FROM_MENU -> {
@@ -46,7 +46,7 @@ public class Main {
 
         Simulation simulation = createSimulation(map);
 
-        while (true) {
+        while (!simulation.isOver()) {
             System.out.println("Выберите действие");
             System.out.println("1) Сделать один ход");
             System.out.println("2) Запустить бесконечный цикл");
@@ -60,7 +60,8 @@ public class Main {
                 case COMMAND_START_SIMULATION -> {
                     Thread thread = new Thread(simulation::startInfinite);
                     thread.start();
-                    UserInputHandler.inputInSimulation(thread);
+                    UserInputHandler handler = new UserInputHandler();
+                    handler.inputInSimulation(thread);
                 }
                 case COMMAND_EXIT_FROM_SIMULATION -> {
                     return;

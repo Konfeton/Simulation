@@ -11,24 +11,28 @@ public abstract class Creature extends Entity {
     protected int speed;
     protected int health;
     protected Class<? extends Entity> target;
+    protected int hungerPoints;
 
-    public Creature() {
-    }
+    protected static final int BASE_HUNGER_POINTS = 3;
 
-    public Creature(int speed, int health) {
-        this.speed = speed;
-        this.health = health;
-    }
-
-    public void makeMove(Coordinates from, WorldMap map){
+    public void makeMove(Coordinates from, WorldMap map) {
         PathFinder pathFinder = new BreadthFirstSearch(target, map);
         Path path = pathFinder.findPath(from);
 
-        if (path.hasPath() && speed >= path.getNumberOfSteps()){
-            eat(path.getLastStep(), map);
-        }else if (path.hasPath()){
-            Coordinates to = path.getStep(speed);
-            map.makeMove(from, to);
+        if (path.hasPath()) {
+            if (path.length() == 1) {
+                eat(path.getTargetCoordinates(), map);
+            } else {
+                map.makeMove(from, path.getStep(speed));
+            }
+        }else {
+            hungerPoints--;
+            if (hungerPoints <= 0) {
+                health--;
+                if (health <= 0) {
+                    map.removeEntity(from);
+                }
+            }
         }
     }
 

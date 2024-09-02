@@ -2,20 +2,20 @@ package com.onkonfeton;
 
 import java.util.Scanner;
 
-public class MapConfigurer {
+public class MapConfigurator {
 
     private static final int MIN_MAP_SIZE = 10;
     private static final int MAX_MAP_SIZE = 20;
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public WorldMap configure(){
+    public WorldMap createMap(){
         System.out.printf("Введите размер карты (в пределах от %d до %d)\n", MIN_MAP_SIZE, MAX_MAP_SIZE);
 
-        System.out.println("Введите длину");
+        System.out.println("Введите высоту карты");
         int maxX = getUserInput();
 
-        System.out.println("Введите высоту");
+        System.out.println("Введите длинну карты");
         int maxY = getUserInput();
 
         return new WorldMap(maxX, maxY);

@@ -8,8 +8,8 @@ import java.util.Map;
 public class WorldMap {
     private final Map<Coordinates, Entity> entities = new HashMap<>();
 
-    private int maxWorldX;
-    private int maxWorldY;
+    private final int maxWorldX;
+    private final int maxWorldY;
 
     public WorldMap(int maxWorldX, int maxWorldY) {
         this.maxWorldX = maxWorldX;

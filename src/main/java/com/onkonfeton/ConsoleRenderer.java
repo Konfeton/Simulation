@@ -13,8 +13,8 @@ public class ConsoleRenderer implements Renderer {
     private static final String SPRITE_CARROT = "\uD83E\uDD55";
 
     public void render(WorldMap map){
-        for (int y = 0; y < map.getMaxWorldX(); y++) {
-            for (int x = 0; x < map.getMaxWorldY(); x++) {
+        for (int x = 0; x < map.getMaxWorldX(); x++) {
+            for (int y = 0; y < map.getMaxWorldY(); y++) {
                 Coordinates coordinates = new Coordinates(x, y);
 
                 if (map.isSquareEmpty(coordinates)) {

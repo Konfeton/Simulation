@@ -9,12 +9,9 @@ public class Herbivore extends Creature{
 
     public Herbivore() {
         speed = 1;
-        health = 1;
+        health = 4;
+        hungerPoints = 3;
         target = HerbivoreFood.class;
-    }
-
-    public Herbivore(int speed, int health) {
-        super(speed, health);
     }
 
     @Override
@@ -22,6 +19,7 @@ public class Herbivore extends Creature{
         Entity food = map.getEntityByCoordinates(lastStep);
         int satiety = ((HerbivoreFood) food).getSatiety();
         health += satiety;
+        hungerPoints = BASE_HUNGER_POINTS;
         map.removeEntity(lastStep);
     }
 

@@ -41,19 +41,19 @@ public class BreadthFirstSearch implements PathFinder {
                 }
             }
         }
-        return Path.emptyPath();
 
+        return Path.emptyPath();
     }
 
     private Path backtracePath(Map<Coordinates, Coordinates> parent, Coordinates start, Coordinates end) {
-        List<Coordinates> path = new ArrayList<>();
-        path.add(end);
-        while(!path.getLast().equals(start)){
-            path.add(parent.get(path.getLast()));
+        List<Coordinates> steps = new ArrayList<>();
+        steps.add(end);
+        while(!steps.getLast().equals(start)){
+            steps.add(parent.get(steps.getLast()));
         }
 
-        Collections.reverse(path);
-        return new Path(path);
+        Collections.reverse(steps);
+        return new Path(steps);
 
     }
 
