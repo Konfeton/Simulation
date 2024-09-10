@@ -2,6 +2,7 @@ package com.onkonfeton;
 
 import com.onkonfeton.action.*;
 import com.onkonfeton.entity.moveable.Herbivore;
+import com.onkonfeton.render.Renderer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class Simulation {
         isRunning = true;
         while(isRunning){
             makeTurn();
+            renderer.renderStopCondition();
             sleep(1000);
         }
     }
@@ -35,7 +37,7 @@ public class Simulation {
             action.perform(map);
         }
         turnCounter++;
-        renderer.render(map);
+        renderer.render(map, turnCounter);
 
         System.out.println("Номер хода: " + turnCounter);
     }

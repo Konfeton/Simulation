@@ -9,12 +9,10 @@ import java.util.*;
 
 public class BreadthFirstSearch implements PathFinder {
 
-
     private final Class<? extends Entity> target;
     private final WorldMap map;
     private final Queue<Coordinates> queue = new ArrayDeque<>();
     private final Map<Coordinates, Coordinates> parentChildMap = new HashMap<>();
-
 
     public BreadthFirstSearch(Class<? extends Entity> target, WorldMap map) {
         this.target = target;

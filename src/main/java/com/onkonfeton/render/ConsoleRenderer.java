@@ -1,5 +1,7 @@
-package com.onkonfeton;
+package com.onkonfeton.render;
 
+import com.onkonfeton.Coordinates;
+import com.onkonfeton.WorldMap;
 import com.onkonfeton.entity.Entity;
 
 public class ConsoleRenderer implements Renderer {
@@ -12,7 +14,8 @@ public class ConsoleRenderer implements Renderer {
     private static final String SPRITE_PREDATOR = "\uD83E\uDD8A";
     private static final String SPRITE_CARROT = "\uD83E\uDD55";
 
-    public void render(WorldMap map){
+    @Override
+    public void render(WorldMap map, int turnCounter){
         for (int x = 0; x < map.getMaxWorldX(); x++) {
             for (int y = 0; y < map.getMaxWorldY(); y++) {
                 Coordinates coordinates = new Coordinates(x, y);
@@ -25,8 +28,13 @@ public class ConsoleRenderer implements Renderer {
                 }
 
             }
-            System.out.println();
+            System.out.println("Номер хода: " + turnCounter);
         }
+    }
+
+    @Override
+    public void renderStopCondition() {
+        System.out.println("Введите '0' чтобы остановить бесконечную симуляцию");
     }
 
     private String getSpriteForEntity(Entity entity) {

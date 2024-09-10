@@ -1,10 +1,9 @@
-import com.onkonfeton.ConsoleRenderer;
+import com.onkonfeton.render.ConsoleRenderer;
 import com.onkonfeton.Coordinates;
 import com.onkonfeton.Simulation;
 import com.onkonfeton.WorldMap;
 import com.onkonfeton.entity.moveable.Herbivore;
 import com.onkonfeton.entity.stationary.Rock;
-import com.onkonfeton.path.Path;
 
 public class Test {
     public static void main(String[] args) {
