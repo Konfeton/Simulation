@@ -26,6 +26,10 @@ public class Simulation {
     public void startInfinite() {
         isRunning = true;
         while(isRunning){
+            if (isOver()){
+                System.out.println("Травоядных больше нет, симуляция окончена");
+                return;
+            }
             makeTurn();
             renderer.renderStopCondition();
             sleep(1000);
@@ -38,8 +42,6 @@ public class Simulation {
         }
         turnCounter++;
         renderer.render(map, turnCounter);
-
-        System.out.println("Номер хода: " + turnCounter);
     }
 
     private void sleep(long millis) {

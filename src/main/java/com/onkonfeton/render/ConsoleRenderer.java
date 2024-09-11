@@ -28,8 +28,9 @@ public class ConsoleRenderer implements Renderer {
                 }
 
             }
-            System.out.println("Номер хода: " + turnCounter);
+            System.out.println();
         }
+        System.out.println("Номер хода: " + turnCounter);
     }
 
     @Override
