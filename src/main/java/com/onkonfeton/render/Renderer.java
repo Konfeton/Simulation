@@ -5,5 +5,5 @@ import com.onkonfeton.WorldMap;
 public interface Renderer {
     void render (WorldMap map, int turnCounter);
 
-    void renderStopCondition();
+    void renderStopCondition(String stopCondition);
 }

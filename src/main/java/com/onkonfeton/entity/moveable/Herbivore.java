@@ -17,11 +17,9 @@ public class Herbivore extends Creature{
     @Override
     protected void eat(Coordinates lastStep, WorldMap map) {
         Entity food = map.getEntityByCoordinates(lastStep);
-        int satiety = ((HerbivoreFood) food).getSatiety();
-        health += satiety;
+        int healingPower = ((HerbivoreFood) food).getHealingPower();
+        health += healingPower;
         hungerPoints = BASE_HUNGER_POINTS;
         map.removeEntity(lastStep);
     }
-
-
 }

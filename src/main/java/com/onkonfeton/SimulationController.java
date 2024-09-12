@@ -5,14 +5,15 @@ import java.util.Scanner;
 
 public class SimulationController {
 
-    private static Scanner scanner = new Scanner(System.in);
-
-
     private static final String COMMAND_NEXT_TURN = "1";
     private static final String COMMAND_START_SIMULATION = "2";
     private static final String COMMAND_EXIT_FROM_SIMULATION = "3";
 
+    private final Scanner scanner = new Scanner(System.in);
+
     private final Simulation simulation;
+    private final UserInputHandler userInputHandler = new UserInputHandler();
+
     private boolean exit = false;
 
 
@@ -44,7 +45,7 @@ public class SimulationController {
             case COMMAND_START_SIMULATION -> {
                 Thread thread = new Thread(simulation::startInfinite);
                 thread.start();
-                Thread thread1 = new Thread(() -> UserInputHandler.inputInSimulation(thread));
+                Thread thread1 = new Thread(() -> userInputHandler.inputInSimulation(thread));
                 thread1.start();
                 try {
                     thread.join();

@@ -15,45 +15,18 @@ public class Simulation {
     private final List<Action> turnActions = new ArrayList<>();
     private boolean isRunning = true;
 
+    public static final String END_MESSAGE = "Травоядных больше нет, симуляция окончена";
+    public static final String STOP_CONDITION_MESSAGE = "Введите '0' чтобы остановить бесконечную симуляцию";
+    public static final int PAUSE_TIME = 1000;
 
     public Simulation(WorldMap map, Renderer renderer) {
         this.map = map;
         this.renderer = renderer;
-        init();
-    }
-    
-
-    public void startInfinite() {
-        isRunning = true;
-        while(isRunning){
-            if (isOver()){
-                System.out.println("Травоядных больше нет, симуляция окончена");
-                return;
-            }
-            makeTurn();
-            renderer.renderStopCondition();
-            sleep(1000);
-        }
+        initializeActions();
+        doActions(initActions);
     }
 
-    public void makeTurn(){
-        for (Action action : turnActions) {
-            action.perform(map);
-        }
-        turnCounter++;
-        renderer.render(map, turnCounter);
-    }
-
-    private void sleep(long millis) {
-        try {
-            Thread.sleep(millis);
-        } catch (InterruptedException ignored) {
-            isRunning = false;
-        }
-    }
-
-
-    private void init() {
+    private void initializeActions() {
         initActions.add(new GrassGenerateAction());
         initActions.add(new TreeGenerateAction());
         initActions.add(new RockGenerateAction());
@@ -64,9 +37,38 @@ public class Simulation {
         turnActions.add(new MakeMoveAction());
         turnActions.add(new GrassGenerateAction());
         turnActions.add(new CarrotGenerateAction());
+    }
 
-        for (Action action : initActions) {
+    private void doActions(List<Action> actions) {
+        for (Action action : actions) {
             action.perform(map);
+        }
+    }
+
+    public void startInfinite() {
+        isRunning = true;
+        while(isRunning){
+            if (isOver()){
+                System.out.println(END_MESSAGE);
+                return;
+            }
+            makeTurn();
+            renderer.renderStopCondition(STOP_CONDITION_MESSAGE);
+            sleep(PAUSE_TIME);
+        }
+    }
+
+    public void makeTurn(){
+        doActions(turnActions);
+        turnCounter++;
+        renderer.render(map, turnCounter);
+    }
+
+    private void sleep(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException ignored) {
+            isRunning = false;
         }
     }
 

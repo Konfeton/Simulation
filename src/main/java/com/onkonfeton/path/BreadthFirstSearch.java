@@ -12,7 +12,7 @@ public class BreadthFirstSearch implements PathFinder {
     private final Class<? extends Entity> target;
     private final WorldMap map;
     private final Queue<Coordinates> queue = new ArrayDeque<>();
-    private final Map<Coordinates, Coordinates> parentChildMap = new HashMap<>();
+    private final Map<Coordinates, Coordinates> neigbourCurrentMap = new LinkedHashMap<>();
 
     public BreadthFirstSearch(Class<? extends Entity> target, WorldMap map) {
         this.target = target;
@@ -27,14 +27,14 @@ public class BreadthFirstSearch implements PathFinder {
 
             if (!isEmptySquare(current)){
                 if (isTarget(current)){
-                    return backtracePath(parentChildMap, start, current);
+                    return backtracePath(neigbourCurrentMap, start, current);
                 }
             }
 
             List<Coordinates> neighbours = getNeighbours(current);
             for (Coordinates neighbour : neighbours) {
-                if(isValidCoordinates(neighbour) && !parentChildMap.containsKey(neighbour)){
-                    parentChildMap.put(neighbour, current);
+                if(isValidCoordinates(neighbour) && !neigbourCurrentMap.containsKey(neighbour)){
+                    neigbourCurrentMap.put(neighbour, current);
                     queue.add(neighbour);
                 }
             }
@@ -43,16 +43,18 @@ public class BreadthFirstSearch implements PathFinder {
         return Path.emptyPath();
     }
 
-    private Path backtracePath(Map<Coordinates, Coordinates> parent, Coordinates start, Coordinates end) {
+    private Path backtracePath(Map<Coordinates, Coordinates> neigbourCurrentMap, Coordinates start, Coordinates end) {
         List<Coordinates> steps = new ArrayList<>();
         steps.add(end);
+
         while(!steps.getLast().equals(start)){
-            steps.add(parent.get(steps.getLast()));
+            Coordinates previousCoordinates = neigbourCurrentMap.get(steps.getLast());
+            steps.add(previousCoordinates);
         }
 
         Collections.reverse(steps);
-        return new Path(steps);
 
+        return new Path(steps);
     }
 
     private List<Coordinates> getNeighbours(Coordinates current) {

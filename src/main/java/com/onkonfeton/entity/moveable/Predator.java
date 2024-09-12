@@ -4,7 +4,7 @@ import com.onkonfeton.Coordinates;
 import com.onkonfeton.WorldMap;
 
 public class Predator extends Creature{
-    private final int strength;
+    private int strength;
 
     public Predator() {
         speed = 2;

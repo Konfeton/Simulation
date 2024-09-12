@@ -34,8 +34,8 @@ public class ConsoleRenderer implements Renderer {
     }
 
     @Override
-    public void renderStopCondition() {
-        System.out.println("Введите '0' чтобы остановить бесконечную симуляцию");
+    public void renderStopCondition(String stopCondition) {
+        System.out.println(stopCondition);
     }
 
     private String getSpriteForEntity(Entity entity) {

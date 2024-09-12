@@ -19,8 +19,8 @@ public abstract class Creature extends Entity {
         PathFinder pathFinder = new BreadthFirstSearch(target, map);
         Path path = pathFinder.findPath(from);
 
-        if (path.hasPath()) {
-            if (path.length() == 1) {
+        if (!path.isEmpty()) {
+            if (isNearTarget(path)) {
                 eat(path.getTargetCoordinates(), map);
             } else {
                 map.makeMove(from, path.getStep(speed));
@@ -34,6 +34,10 @@ public abstract class Creature extends Entity {
                 }
             }
         }
+    }
+
+    private boolean isNearTarget(Path path) {
+        return path.length() == 1;
     }
 
     protected abstract void eat(Coordinates coordinates, WorldMap map);

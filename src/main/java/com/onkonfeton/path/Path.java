@@ -12,7 +12,7 @@ public final class Path {
 
     public Path(List<Coordinates> steps) {
         this.steps = new ArrayList<>(steps);
-        length = steps.size() - 1;
+        length = this.steps.size() - 1;
     }
 
     public Coordinates getStep(int speed){
@@ -22,8 +22,8 @@ public final class Path {
         return steps.get(speed);
     }
 
-    public boolean hasPath(){
-        return !steps.isEmpty();
+    public boolean isEmpty(){
+        return steps.isEmpty();
     }
 
     public int length() {
