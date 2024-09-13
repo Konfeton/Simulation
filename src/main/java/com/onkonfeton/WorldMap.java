@@ -42,7 +42,6 @@ public class WorldMap {
         placeEntity(to, entity);
     }
 
-
     public void removeEntity(Coordinates from){
         entities.remove(from);
     }
@@ -54,7 +53,6 @@ public class WorldMap {
     public boolean isSquareEmpty(Coordinates coordinates){
         return !entities.containsKey(coordinates);
     }
-
 
     public int getMaxWorldX() {
         return maxWorldX;

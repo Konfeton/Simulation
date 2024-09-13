@@ -1,6 +1,5 @@
 package com.onkonfeton;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class SimulationController {
@@ -53,7 +52,6 @@ public class SimulationController {
                     throw new RuntimeException(e);
                 }
                 thread1.interrupt();
-
             }
             case COMMAND_EXIT_FROM_SIMULATION -> {
                 exit = true;
