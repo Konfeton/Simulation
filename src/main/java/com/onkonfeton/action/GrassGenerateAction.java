@@ -3,12 +3,13 @@ package com.onkonfeton.action;
 import com.onkonfeton.WorldMap;
 import com.onkonfeton.entity.stationary.Grass;
 
-public class GrassGenerateAction extends FoodGenerateAction{
+public class GrassGenerateAction extends HerbivoreFoodGenerateAction {
+
+    private static final float DEFAULT_SPAWN_RATE = 0.06f;
 
     public GrassGenerateAction() {
-        spawnRate = 0.06f;
+        super(DEFAULT_SPAWN_RATE);
     }
-
     @Override
     protected int getCurrentNumber(WorldMap map) {
         return map.getEntitiesOfType(Grass.class).keySet().size();

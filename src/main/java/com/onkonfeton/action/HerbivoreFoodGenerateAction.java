@@ -3,7 +3,11 @@ package com.onkonfeton.action;
 import com.onkonfeton.WorldMap;
 import com.onkonfeton.entity.stationary.HerbivoreFood;
 
-public abstract class FoodGenerateAction extends SpawnAction<HerbivoreFood> {
+public abstract class HerbivoreFoodGenerateAction extends SpawnAction<HerbivoreFood> {
+
+    public HerbivoreFoodGenerateAction(float spawnRate) {
+        super(spawnRate);
+    }
 
     @Override
     protected int getNumberToSpawn(WorldMap map) {

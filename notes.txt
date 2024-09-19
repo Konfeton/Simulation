@@ -2,5 +2,48 @@
 Была ещё альтернатива возвращать в поиске пути new Path(Collections.emptyList());
 
 Должна ли трава (и морковь) знать сколько очков здоровья она даёт?
+или лучше в методе травоядного (eat)
+//А должно ли травоядное знать сколько ему даёт здоровья даёт еда?
+    Entity food = map.getEntityByCoordinates(lastStep);
+    if (food instanceof Grass){
+     health += GRASS_HEALING_POWER
+    }
+
 
 название мапы, которая хранит предыдущие координаты нмб не самое удачное (изначально была parentChildMap)
+Сомнения насчёт названия MapConfigurator
+
+maxWorldX and maxWorldY показались более правильными нежели maxWidth and maxHeight потому что не сразу понятно, что ширина, а что высота
+а тут иксы сравниваются с иксами, а игрики с игриками
+
+Path
+возможно обёртка над List<Coordinates> лишняя, хз зачем написал, что-то вдохновился говорящим название класса и ArrayList'ом
+
+
+как будто можно и пизды за эти Actions получить
+
+да, такой класс смотрится неплохо
+public class UniversalSpawn extends Action {
+
+    private final int numberToSpawn;
+    private final Supplier<? extends Entity> supplier;
+
+    public UniversalSpawn(int numberToSpawn, Supplier<? extends Entity> supplier) {
+        this.numberToSpawn = numberToSpawn;
+        this.supplier = supplier;
+    }
+
+    @Override
+    public void perform(WorldMap map) {
+        for (int i = 0; i <= numberToSpawn; i++) {
+            Coordinates coordinates = getRandomEmptyCoordinates(map);
+            map.placeEntity(coordinates, supplier.get());
+        }
+    }
+}
+
+но как реализовать логику с добавлением количества существ в зависимости от размеров карты
+
+УниверсальныйSpawnAction заяцSpawnAction = new УниверсальныйSpawnAction(ПРОЦЕНТ ЗАСЕЛЕНИЯ, () -> new Заяц);
+заяцSpawnAction.perform(worldMap);
+и почему вызывающий код должен знать сколько зайчев нужн

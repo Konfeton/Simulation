@@ -4,8 +4,10 @@ import com.onkonfeton.entity.stationary.Rock;
 
 public class RockGenerateAction extends SpawnAction<Rock> {
 
+    private static final float DEFAULT_SPAWN_RATE = 0.03f;
+
     public RockGenerateAction() {
-        spawnRate = 0.03f;
+        super(DEFAULT_SPAWN_RATE);
     }
 
     @Override

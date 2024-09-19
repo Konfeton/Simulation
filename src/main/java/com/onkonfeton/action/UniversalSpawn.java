@@ -5,13 +5,16 @@ import com.onkonfeton.WorldMap;
 import com.onkonfeton.entity.Entity;
 
 import java.util.Random;
+import java.util.function.Supplier;
 
-public abstract class SpawnAction<T extends Entity> extends Action {
+public class UniversalSpawn extends Action {
 
-    protected float spawnRate;
+    private final float percentToSpawn;
+    private final Supplier<? extends Entity> supplier;
 
-    public SpawnAction(float spawnRate) {
-        this.spawnRate = spawnRate;
+    public UniversalSpawn(float percentToSpawn, Supplier<? extends Entity> supplier) {
+        this.percentToSpawn = percentToSpawn;
+        this.supplier = supplier;
     }
 
     @Override
@@ -19,13 +22,13 @@ public abstract class SpawnAction<T extends Entity> extends Action {
         int numberToSpawn = getNumberToSpawn(map);
         for (int i = 0; i <= numberToSpawn; i++) {
             Coordinates coordinates = getRandomEmptyCoordinates(map);
-            map.placeEntity(coordinates, getEntity());
+            map.placeEntity(coordinates, supplier.get());
         }
     }
 
     protected int getNumberToSpawn(WorldMap map){
         int mapSize = map.getMaxWorldX() * map.getMaxWorldY();
-        int number = (int) Math.ceil(mapSize * spawnRate);
+        int number = (int) Math.ceil(mapSize * percentToSpawn);
         return number;
     }
 
@@ -41,7 +44,4 @@ public abstract class SpawnAction<T extends Entity> extends Action {
             }
         }
     }
-
-    protected abstract T getEntity();
-
 }

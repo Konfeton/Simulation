@@ -33,6 +33,8 @@ public class Simulation {
         initActions.add(new CarrotGenerateAction());
         initActions.add(new HerbivoreGenerateAction());
         initActions.add(new PredatorGenerateAction());
+        initActions.add(new UniversalSpawn(0.07f, Herbivore::new));
+
 
         turnActions.add(new MakeMoveAction());
         turnActions.add(new GrassGenerateAction());

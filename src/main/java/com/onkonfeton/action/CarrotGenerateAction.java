@@ -3,10 +3,12 @@ package com.onkonfeton.action;
 import com.onkonfeton.WorldMap;
 import com.onkonfeton.entity.stationary.Carrot;
 
-public class CarrotGenerateAction extends FoodGenerateAction {
+public class CarrotGenerateAction extends HerbivoreFoodGenerateAction {
+
+    private static final float DEFAULT_SPAWN_RATE = 0.02f;
 
     public CarrotGenerateAction() {
-        spawnRate = 0.02f;
+        super(DEFAULT_SPAWN_RATE);
     }
 
     @Override

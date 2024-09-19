@@ -3,23 +3,26 @@ package com.onkonfeton.entity.moveable;
 import com.onkonfeton.Coordinates;
 import com.onkonfeton.WorldMap;
 
-public class Predator extends Creature{
+public class Predator extends Creature {
+    private final static int DEFAULT_SPEED = 2;
+    private final static int DEFAULT_HEALTH = 5;
+    private final static int DEFAULT_HUNGER_POINTS = 4;
+    private final static int DEFAULT_STRENGTH = 2;
+
     private int strength;
 
     public Predator() {
-        speed = 2;
-        health = 5;
-        strength = 2;
-        target = Herbivore.class;
+        super(DEFAULT_SPEED, DEFAULT_HEALTH, DEFAULT_HUNGER_POINTS, Herbivore.class);
+        this.strength = DEFAULT_STRENGTH;
     }
 
     @Override
     protected void eat(Coordinates coordinates, WorldMap map) {
         Herbivore herbivore = (Herbivore) map.getEntityByCoordinates(coordinates);
         herbivore.health -= this.strength;
-        if (herbivore.health <= 0){
+        if (herbivore.health <= 0) {
             map.removeEntity(coordinates);
-            hungerPoints = BASE_HUNGER_POINTS;
+            hungerPoints = DEFAULT_HUNGER_POINTS;
             this.health += 1;
         }
     }

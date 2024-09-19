@@ -10,10 +10,16 @@ import com.onkonfeton.path.PathFinder;
 public abstract class Creature extends Entity {
     protected int speed;
     protected int health;
-    protected Class<? extends Entity> target;
     protected int hungerPoints;
+    protected Class<? extends Entity> target;
 
-    protected static final int BASE_HUNGER_POINTS = 3;
+
+    public Creature(int speed, int health, int hungerPoints, Class<? extends Entity> target) {
+        this.speed = speed;
+        this.health = health;
+        this.hungerPoints = hungerPoints;
+        this.target = target;
+    }
 
     public void makeMove(Coordinates from, WorldMap map) {
         PathFinder pathFinder = new BreadthFirstSearch(target, map);

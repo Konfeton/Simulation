@@ -4,8 +4,10 @@ import com.onkonfeton.entity.moveable.Predator;
 
 public class PredatorGenerateAction extends SpawnAction<Predator> {
 
+    private static final float DEFAULT_SPAWN_RATE = 0.04f;
+
     public PredatorGenerateAction() {
-        spawnRate = 0.04f;
+        super(DEFAULT_SPAWN_RATE);
     }
 
     @Override

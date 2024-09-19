@@ -5,13 +5,13 @@ import com.onkonfeton.WorldMap;
 import com.onkonfeton.entity.Entity;
 import com.onkonfeton.entity.stationary.HerbivoreFood;
 
-public class Herbivore extends Creature{
+public class Herbivore extends Creature {
+    private final static int DEFAULT_SPEED = 1;
+    private final static int DEFAULT_HEALTH = 4;
+    private static final int DEFAULT_HUNGER_POINTS = 3;
 
     public Herbivore() {
-        speed = 1;
-        health = 4;
-        hungerPoints = 3;
-        target = HerbivoreFood.class;
+        super(DEFAULT_SPEED, DEFAULT_HEALTH, DEFAULT_HUNGER_POINTS, HerbivoreFood.class);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class Herbivore extends Creature{
         Entity food = map.getEntityByCoordinates(lastStep);
         int healingPower = ((HerbivoreFood) food).getHealingPower();
         health += healingPower;
-        hungerPoints = BASE_HUNGER_POINTS;
+        hungerPoints = DEFAULT_HUNGER_POINTS;
         map.removeEntity(lastStep);
     }
 }

@@ -43,11 +43,23 @@ public class WorldMap {
     }
 
     public void removeEntity(Coordinates from){
-        entities.remove(from);
+        Entity entity = entities.remove(from);
+        if (entity == null){
+            throw new IllegalArgumentException("Tried to remove non-existent entity by coordinates: +" + from);
+        }
     }
 
     public void placeEntity(Coordinates to, Entity entity){
+        if (!isCoordinatesInRange(to)) {
+            throw new IllegalArgumentException("Coordinates " + to + " out of map bound");
+        }
         entities.put(to, entity);
+    }
+
+    private boolean isCoordinatesInRange(Coordinates coordinates) {
+        int x = coordinates.getX();
+        int y = coordinates.getY();
+        return (x > 0 && x < maxWorldX) && (y > 0 && y < maxWorldY);
     }
 
     public boolean isSquareEmpty(Coordinates coordinates){
