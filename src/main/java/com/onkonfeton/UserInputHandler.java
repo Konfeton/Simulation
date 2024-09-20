@@ -14,7 +14,7 @@ public class UserInputHandler implements Runnable{
 
     @Override
     public void run() {
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             try {
                 if (System.in.available() > 0) {
                     String input = scanner.nextLine();
@@ -22,8 +22,6 @@ public class UserInputHandler implements Runnable{
                         thread.interrupt();
                         break;
                     }
-                }else if(Thread.currentThread().isInterrupted()){
-                    return;
                 }
             } catch (IOException e) {
 
