@@ -11,10 +11,8 @@ public class SimulationController {
     private final Scanner scanner = new Scanner(System.in);
 
     private final Simulation simulation;
-    private final UserInputHandler userInputHandler = new UserInputHandler();
 
     private boolean exit = false;
-
 
     public SimulationController(Simulation simulation) {
         this.simulation = simulation;
@@ -42,21 +40,32 @@ public class SimulationController {
                 simulation.makeTurn();
             }
             case COMMAND_START_SIMULATION -> {
-                Thread thread = new Thread(simulation::startInfinite);
-                thread.start();
-                Thread thread1 = new Thread(() -> userInputHandler.inputInSimulation(thread));
-                thread1.start();
-                try {
-                    thread.join();
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                thread1.interrupt();
+                Thread simulationThread = new Thread(simulation::startInfinite);
+                UserInputHandler userInputHandler = new UserInputHandler(simulationThread);
+                Thread userInputHandlerThread = new Thread(userInputHandler);
+
+                simulationThread.start();
+                userInputHandlerThread.start();
+
+                waitForSimulationToStop(simulationThread);
+                stopInputHandling(userInputHandlerThread);
             }
             case COMMAND_EXIT_FROM_SIMULATION -> {
                 exit = true;
             }
             default -> System.out.println("Неверный ввод! Попробуйте ещё раз");
         }
+    }
+
+    private void waitForSimulationToStop(Thread thread) {
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void stopInputHandling(Thread thread1) {
+        thread1.interrupt();
     }
 }

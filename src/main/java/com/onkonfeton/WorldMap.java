@@ -59,7 +59,7 @@ public class WorldMap {
     private boolean isCoordinatesInRange(Coordinates coordinates) {
         int x = coordinates.getX();
         int y = coordinates.getY();
-        return (x > 0 && x < maxWorldX) && (y > 0 && y < maxWorldY);
+        return (x >= 0 && x < maxWorldX) && (y >= 0 && y < maxWorldY);
     }
 
     public boolean isSquareEmpty(Coordinates coordinates){

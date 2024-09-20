@@ -43,5 +43,4 @@ public abstract class SpawnAction<T extends Entity> extends Action {
     }
 
     protected abstract T getEntity();
-
 }

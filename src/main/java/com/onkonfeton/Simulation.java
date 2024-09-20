@@ -1,6 +1,13 @@
 package com.onkonfeton;
 
-import com.onkonfeton.action.*;
+import com.onkonfeton.action.Action;
+import com.onkonfeton.action.CarrotGenerateAction;
+import com.onkonfeton.action.GrassGenerateAction;
+import com.onkonfeton.action.HerbivoreGenerateAction;
+import com.onkonfeton.action.MakeMoveAction;
+import com.onkonfeton.action.PredatorGenerateAction;
+import com.onkonfeton.action.RockGenerateAction;
+import com.onkonfeton.action.TreeGenerateAction;
 import com.onkonfeton.entity.moveable.Herbivore;
 import com.onkonfeton.render.Renderer;
 
@@ -8,6 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Simulation {
+    public static final String END_MESSAGE = "Травоядных больше нет, симуляция окончена";
+    public static final String STOP_CONDITION_MESSAGE = "Введите '0' чтобы остановить бесконечную симуляцию";
+    public static final int PAUSE_TIME_MS = 1000;
+
     private final WorldMap map;
     private int turnCounter;
     private final Renderer renderer;
@@ -15,9 +26,6 @@ public class Simulation {
     private final List<Action> turnActions = new ArrayList<>();
     private boolean isRunning = true;
 
-    public static final String END_MESSAGE = "Травоядных больше нет, симуляция окончена";
-    public static final String STOP_CONDITION_MESSAGE = "Введите '0' чтобы остановить бесконечную симуляцию";
-    public static final int PAUSE_TIME = 1000;
 
     public Simulation(WorldMap map, Renderer renderer) {
         this.map = map;
@@ -33,8 +41,6 @@ public class Simulation {
         initActions.add(new CarrotGenerateAction());
         initActions.add(new HerbivoreGenerateAction());
         initActions.add(new PredatorGenerateAction());
-        initActions.add(new UniversalSpawn(0.07f, Herbivore::new));
-
 
         turnActions.add(new MakeMoveAction());
         turnActions.add(new GrassGenerateAction());
@@ -56,7 +62,7 @@ public class Simulation {
             }
             makeTurn();
             renderer.renderStopCondition(STOP_CONDITION_MESSAGE);
-            sleep(PAUSE_TIME);
+            sleep(PAUSE_TIME_MS);
         }
     }
 
