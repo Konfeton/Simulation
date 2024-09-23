@@ -1,14 +1,15 @@
 package com.onkonfeton;
 
 import com.onkonfeton.action.Action;
-import com.onkonfeton.action.CarrotGenerateAction;
-import com.onkonfeton.action.GrassGenerateAction;
-import com.onkonfeton.action.HerbivoreGenerateAction;
+import com.onkonfeton.action.DynamicEntitySpawnAction;
+import com.onkonfeton.action.EntitySpawnAction;
 import com.onkonfeton.action.MakeMoveAction;
-import com.onkonfeton.action.PredatorGenerateAction;
-import com.onkonfeton.action.RockGenerateAction;
-import com.onkonfeton.action.TreeGenerateAction;
 import com.onkonfeton.entity.moveable.Herbivore;
+import com.onkonfeton.entity.moveable.Predator;
+import com.onkonfeton.entity.stationary.Carrot;
+import com.onkonfeton.entity.stationary.Grass;
+import com.onkonfeton.entity.stationary.Rock;
+import com.onkonfeton.entity.stationary.Tree;
 import com.onkonfeton.render.Renderer;
 
 import java.util.ArrayList;
@@ -35,16 +36,21 @@ public class Simulation {
     }
 
     private void initializeActions() {
-        initActions.add(new GrassGenerateAction());
-        initActions.add(new TreeGenerateAction());
-        initActions.add(new RockGenerateAction());
-        initActions.add(new CarrotGenerateAction());
-        initActions.add(new HerbivoreGenerateAction());
-        initActions.add(new PredatorGenerateAction());
+        initActions.add(new EntitySpawnAction((convertToNumber(0.06)), Grass::new));
+        initActions.add(new EntitySpawnAction(convertToNumber(0.03), Tree::new));
+        initActions.add(new EntitySpawnAction(convertToNumber(0.03), Rock::new));
+        initActions.add(new EntitySpawnAction(convertToNumber(0.02), Carrot::new));
+        initActions.add(new EntitySpawnAction(convertToNumber(0.06), Herbivore::new));
+        initActions.add(new EntitySpawnAction(convertToNumber(0.04), Predator::new));
 
         turnActions.add(new MakeMoveAction());
-        turnActions.add(new GrassGenerateAction());
-        turnActions.add(new CarrotGenerateAction());
+        turnActions.add(new DynamicEntitySpawnAction(convertToNumber(0.02), Carrot::new));
+        turnActions.add(new DynamicEntitySpawnAction(convertToNumber(0.06), Grass::new));
+    }
+
+    private int convertToNumber(double spawnRate) {
+        int mapSize = map.getMapSize();
+        return (int) Math.ceil(mapSize * spawnRate);
     }
 
     private void doActions(List<Action> actions) {

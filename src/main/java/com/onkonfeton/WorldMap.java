@@ -66,6 +66,10 @@ public class WorldMap {
         return !entities.containsKey(coordinates);
     }
 
+    public int getMapSize(){
+        return maxWorldX * maxWorldY;
+    }
+
     public int getMaxWorldX() {
         return maxWorldX;
     }
