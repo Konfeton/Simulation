@@ -2,7 +2,7 @@ package com.onkonfeton.action;
 
 import com.onkonfeton.map.Coordinates;
 import com.onkonfeton.map.WorldMap;
-import com.onkonfeton.entity.moveable.Creature;
+import com.onkonfeton.entity.creature.Creature;
 
 import java.util.Set;
 

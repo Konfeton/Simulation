@@ -1,4 +1,4 @@
-package com.onkonfeton.entity.moveable;
+package com.onkonfeton.entity.creature;
 
 import com.onkonfeton.map.Coordinates;
 import com.onkonfeton.map.WorldMap;

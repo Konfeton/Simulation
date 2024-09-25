@@ -8,7 +8,7 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class EntitySpawnAction extends Action{
-    protected int numberToSpawn;
+    protected final int numberToSpawn;
     protected final Supplier<? extends Entity> entitySupplier;
 
     public EntitySpawnAction(int numberToSpawn, Supplier<? extends Entity> entitySupplier) {
@@ -28,7 +28,6 @@ public class EntitySpawnAction extends Action{
     protected int getNumberToSpawn(WorldMap map){
         return numberToSpawn;
     }
-
 
     private Coordinates getRandomEmptyCoordinates(WorldMap map) {
         Random random = new Random();
