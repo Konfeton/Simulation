@@ -1,6 +1,6 @@
 package com.onkonfeton.path;
 
-import com.onkonfeton.Coordinates;
+import com.onkonfeton.map.Coordinates;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,12 +36,5 @@ public final class Path {
 
     public static Path emptyPath(){
         return new Path(Collections.emptyList());
-    }
-
-    @Override
-    public String toString() {
-        return "Path{" +
-                "steps=" + steps +
-                '}';
     }
 }

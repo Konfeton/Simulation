@@ -1,4 +1,4 @@
-package com.onkonfeton;
+package com.onkonfeton.simulation;
 
 import java.util.Scanner;
 

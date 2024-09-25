@@ -1,6 +1,6 @@
 package com.onkonfeton.path;
 
-import com.onkonfeton.Coordinates;
+import com.onkonfeton.map.Coordinates;
 
 public interface PathFinder {
     Path findPath(Coordinates start);

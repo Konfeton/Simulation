@@ -1,8 +1,8 @@
 package com.onkonfeton.path;
 
 
-import com.onkonfeton.Coordinates;
-import com.onkonfeton.WorldMap;
+import com.onkonfeton.map.Coordinates;
+import com.onkonfeton.map.WorldMap;
 import com.onkonfeton.entity.Entity;
 
 import java.util.*;
@@ -88,8 +88,4 @@ public class BreadthFirstSearch implements PathFinder {
     private boolean isTarget(Coordinates coordinates) {
         return target.isInstance(map.getEntityByCoordinates(coordinates));
     }
-
-
-
-
 }

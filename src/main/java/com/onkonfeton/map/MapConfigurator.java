@@ -1,4 +1,4 @@
-package com.onkonfeton;
+package com.onkonfeton.map;
 
 import java.util.Scanner;
 

@@ -1,7 +1,7 @@
 package com.onkonfeton.render;
 
-import com.onkonfeton.Coordinates;
-import com.onkonfeton.WorldMap;
+import com.onkonfeton.map.Coordinates;
+import com.onkonfeton.map.WorldMap;
 import com.onkonfeton.entity.Entity;
 
 public class ConsoleRenderer implements Renderer {
@@ -26,7 +26,6 @@ public class ConsoleRenderer implements Renderer {
                     Entity entity = map.getEntityByCoordinates(coordinates);
                     System.out.print((getSpriteForEntity(entity)));
                 }
-
             }
             System.out.println();
         }

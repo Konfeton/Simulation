@@ -1,7 +1,7 @@
 package com.onkonfeton.entity.moveable;
 
-import com.onkonfeton.Coordinates;
-import com.onkonfeton.WorldMap;
+import com.onkonfeton.map.Coordinates;
+import com.onkonfeton.map.WorldMap;
 
 public class Predator extends Creature {
     private final static int DEFAULT_SPEED = 2;

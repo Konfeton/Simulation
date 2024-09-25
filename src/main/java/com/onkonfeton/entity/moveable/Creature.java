@@ -1,7 +1,7 @@
 package com.onkonfeton.entity.moveable;
 
-import com.onkonfeton.Coordinates;
-import com.onkonfeton.WorldMap;
+import com.onkonfeton.map.Coordinates;
+import com.onkonfeton.map.WorldMap;
 import com.onkonfeton.entity.Entity;
 import com.onkonfeton.path.BreadthFirstSearch;
 import com.onkonfeton.path.Path;

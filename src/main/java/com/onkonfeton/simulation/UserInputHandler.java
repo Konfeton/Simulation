@@ -1,4 +1,4 @@
-package com.onkonfeton;
+package com.onkonfeton.simulation;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -23,7 +23,7 @@ public class UserInputHandler implements Runnable{
                         break;
                     }
                 }
-            } catch (IOException e) {
+            } catch (IOException ignored) {
 
             }
         }

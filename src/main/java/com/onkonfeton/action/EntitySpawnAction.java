@@ -1,7 +1,7 @@
 package com.onkonfeton.action;
 
-import com.onkonfeton.Coordinates;
-import com.onkonfeton.WorldMap;
+import com.onkonfeton.map.Coordinates;
+import com.onkonfeton.map.WorldMap;
 import com.onkonfeton.entity.Entity;
 
 import java.util.Random;
@@ -18,11 +18,17 @@ public class EntitySpawnAction extends Action{
 
     @Override
     public void perform(WorldMap map) {
+        int numberToSpawn = getNumberToSpawn(map);
         for (int i = 0; i <= numberToSpawn; i++) {
             Coordinates coordinates = getRandomEmptyCoordinates(map);
             map.placeEntity(coordinates, entitySupplier.get());
         }
     }
+
+    protected int getNumberToSpawn(WorldMap map){
+        return numberToSpawn;
+    }
+
 
     private Coordinates getRandomEmptyCoordinates(WorldMap map) {
         Random random = new Random();
