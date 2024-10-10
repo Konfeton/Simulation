@@ -12,7 +12,7 @@ public abstract class Creature extends Entity {
     protected int health;
     protected int hungerPoints;
     protected Class<? extends Entity> target;
-
+    private final PathFinder pathFinder = new BreadthFirstSearch();
 
     public Creature(int speed, int health, int hungerPoints, Class<? extends Entity> target) {
         this.speed = speed;
@@ -22,14 +22,14 @@ public abstract class Creature extends Entity {
     }
 
     public void makeMove(Coordinates from, WorldMap map) {
-        PathFinder pathFinder = new BreadthFirstSearch(target, map);
-        Path path = pathFinder.findPath(from);
+
+        Path path = pathFinder.findPath(map, from, target);
 
         if (!path.isEmpty()) {
             if (isNearTarget(path)) {
                 eat(path.getTargetCoordinates(), map);
             } else {
-                map.makeMove(from, path.getStep(speed));
+                changePosition(map, from, path.getStep(speed));
             }
         }else {
             hungerPoints--;
@@ -44,6 +44,11 @@ public abstract class Creature extends Entity {
 
     private boolean isNearTarget(Path path) {
         return path.length() == 1;
+    }
+
+    private void changePosition(WorldMap map, Coordinates from, Coordinates to) {
+        map.removeEntity(from);
+        map.placeEntity(to, this);
     }
 
     protected abstract void eat(Coordinates coordinates, WorldMap map);

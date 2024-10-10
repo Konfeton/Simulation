@@ -36,12 +36,6 @@ public class WorldMap {
         return result;
     }
 
-    public void makeMove(Coordinates from, Coordinates to) {
-        Entity entity = entities.get(from);
-        removeEntity(from);
-        placeEntity(to, entity);
-    }
-
     public void removeEntity(Coordinates from){
         Entity entity = entities.remove(from);
         if (entity == null){
@@ -50,10 +44,14 @@ public class WorldMap {
     }
 
     public void placeEntity(Coordinates to, Entity entity){
-        if (!isCoordinatesInRange(to)) {
-            throw new IllegalArgumentException("Coordinates " + to + " out of map bound");
+        if (!isValidCoordinates(to)) {
+            throw new IllegalArgumentException("Cannot place entity by coordinates " + to);
         }
         entities.put(to, entity);
+    }
+
+    private boolean isValidCoordinates(Coordinates coordinates) {
+        return isCoordinatesInRange(coordinates) && isSquareEmpty(coordinates);
     }
 
     private boolean isCoordinatesInRange(Coordinates coordinates) {
@@ -64,10 +62,6 @@ public class WorldMap {
 
     public boolean isSquareEmpty(Coordinates coordinates){
         return !entities.containsKey(coordinates);
-    }
-
-    public int getMapSize(){
-        return maxWorldX * maxWorldY;
     }
 
     public int getMaxWorldX() {

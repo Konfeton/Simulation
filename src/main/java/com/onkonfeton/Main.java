@@ -1,6 +1,5 @@
 package com.onkonfeton;
 
-import com.onkonfeton.map.MapConfigurator;
 import com.onkonfeton.map.WorldMap;
 import com.onkonfeton.render.ConsoleRenderer;
 import com.onkonfeton.render.Renderer;

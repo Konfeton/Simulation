@@ -50,7 +50,13 @@ public class SpawnRates {
   }
 
     public int convertToNumber(double spawnRate) {
-        int mapSize = map.getMapSize();
+        int mapSize = getMapSize();
         return (int) Math.ceil(mapSize * spawnRate);
+    }
+
+    private int getMapSize(){
+        int maxWorldX = map.getMaxWorldX();
+        int maxWorldY = map.getMaxWorldY();
+        return maxWorldX * maxWorldY;
     }
 }

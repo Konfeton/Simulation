@@ -9,31 +9,27 @@ import java.util.*;
 
 public class BreadthFirstSearch implements PathFinder {
 
-    private final Class<? extends Entity> target;
-    private final WorldMap map;
     private final Queue<Coordinates> queue = new ArrayDeque<>();
     private final Map<Coordinates, Coordinates> neigbourCurrentMap = new LinkedHashMap<>();
 
-    public BreadthFirstSearch(Class<? extends Entity> target, WorldMap map) {
-        this.target = target;
-        this.map = map;
-    }
+    public Path findPath(WorldMap map, Coordinates start, Class<? extends Entity> target) {
+        queue.clear();
+        neigbourCurrentMap.clear();
 
-    public Path findPath(Coordinates start) {
         queue.add(start);
 
         while(!queue.isEmpty()){
             Coordinates current = queue.remove();
 
-            if (!isEmptySquare(current)){
-                if (isTarget(current)){
+            if (!isEmptySquare(map, current)){
+                if (isTarget(map, current, target)){
                     return backtracePath(neigbourCurrentMap, start, current);
                 }
             }
 
             List<Coordinates> neighbours = getNeighbours(current);
             for (Coordinates neighbour : neighbours) {
-                if(isValidCoordinates(neighbour) && !neigbourCurrentMap.containsKey(neighbour)){
+                if(isValidCoordinates(map, neighbour, target) && !neigbourCurrentMap.containsKey(neighbour)){
                     neigbourCurrentMap.put(neighbour, current);
                     queue.add(neighbour);
                 }
@@ -71,21 +67,21 @@ public class BreadthFirstSearch implements PathFinder {
         return neighbours;
     }
 
-    private boolean isValidCoordinates(Coordinates coordinates) {
-        return isCoordinatesInBorder(coordinates) && (isEmptySquare(coordinates) || isTarget(coordinates));
+    private boolean isValidCoordinates(WorldMap map, Coordinates coordinates, Class<? extends Entity> target) {
+        return isCoordinatesInBorder(map, coordinates) && (isEmptySquare(map, coordinates) || isTarget(map, coordinates, target));
     }
 
-    private boolean isCoordinatesInBorder(Coordinates coordinates) {
+    private boolean isCoordinatesInBorder(WorldMap map, Coordinates coordinates) {
         int x = coordinates.getX();
         int y = coordinates.getY();
         return x >= 0 && x < map.getMaxWorldX() && y >= 0 && y < map.getMaxWorldY();
     }
 
-    private boolean isEmptySquare(Coordinates coordinates) {
+    private boolean isEmptySquare(WorldMap map, Coordinates coordinates) {
         return map.isSquareEmpty(coordinates);
     }
 
-    private boolean isTarget(Coordinates coordinates) {
+    private boolean isTarget(WorldMap map, Coordinates coordinates, Class<? extends Entity> target) {
         return target.isInstance(map.getEntityByCoordinates(coordinates));
     }
 }
