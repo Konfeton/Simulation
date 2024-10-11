@@ -4,14 +4,14 @@ import com.onkonfeton.map.WorldMap;
 
 import java.util.Scanner;
 
-public class MapConfigurator {
+public class MapConstructor {
 
     private static final int MIN_MAP_SIZE = 10;
     private static final int MAX_MAP_SIZE = 20;
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public WorldMap createMap() {
+    public WorldMap construct() {
         System.out.printf("Введите размер карты (в пределах от %d до %d)\n", MIN_MAP_SIZE, MAX_MAP_SIZE);
 
         System.out.println("Введите высоту карты");

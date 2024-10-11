@@ -3,7 +3,9 @@ package com.onkonfeton.map;
 import com.onkonfeton.entity.Entity;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class WorldMap {
     private final Map<Coordinates, Entity> entities = new HashMap<>();
@@ -24,12 +26,12 @@ public class WorldMap {
         return entity;
     }
 
-    public<T> Map<Coordinates, T> getEntitiesOfType(Class<? extends Entity> type){
-        Map<Coordinates, T> result = new HashMap<>();
+    public Set<Coordinates> getCoordinatesOfEntityType(Class<? extends Entity> clazz) {
+        Set<Coordinates> result = new HashSet<>();
 
         for (Map.Entry<Coordinates, Entity> entry : this.entities.entrySet()) {
-            if (type.isInstance(entry.getValue())){
-                result.put(entry.getKey(), (T) entry.getValue());
+            if (clazz.isInstance(entry.getValue())) {
+                result.add(entry.getKey());
             }
         }
 

@@ -11,7 +11,7 @@ public class DynamicEntitySpawnAction extends EntitySpawnAction {
     }
 
     protected int getNumberToSpawn(WorldMap map) {
-        int currentNumber = map.getEntitiesOfType(entitySupplier.get().getClass()).keySet().size();
+        int currentNumber = map.getCoordinatesOfEntityType(entitySupplier.get().getClass()).size();
         if (currentNumber < numberToSpawn) {
             return numberToSpawn - currentNumber;
         }

@@ -23,8 +23,8 @@ public class Main {
 
             switch (scanner.nextLine()) {
                 case COMMAND_CREATE_NEW_SIMULATION -> {
-                    MapConfigurator mapConfigurator = new MapConfigurator();
-                    WorldMap map = mapConfigurator.createMap();
+                    MapConstructor mapConstructor = new MapConstructor();
+                    WorldMap map = mapConstructor.construct();
                     Renderer renderer = new ConsoleRenderer();
                     Simulation simulation = new Simulation(map, renderer);
                     SimulationController simulationController = new SimulationController(simulation);

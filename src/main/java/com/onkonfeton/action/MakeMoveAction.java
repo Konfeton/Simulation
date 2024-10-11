@@ -9,7 +9,7 @@ import java.util.Set;
 public class MakeMoveAction extends Action{
     @Override
     public void perform(WorldMap map) {
-        Set<Coordinates> coordinates = map.getEntitiesOfType(Creature.class).keySet();
+        Set<Coordinates> coordinates = map.getCoordinatesOfEntityType(Creature.class);
         for (Coordinates coordinate : coordinates) {
             if (!map.isSquareEmpty(coordinate)){
                 Creature creature = (Creature) map.getEntityByCoordinates(coordinate);

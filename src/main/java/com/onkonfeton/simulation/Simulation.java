@@ -84,6 +84,6 @@ public class Simulation {
     }
 
     public boolean isOver() {
-        return map.getEntitiesOfType(Herbivore.class).keySet().isEmpty();
+        return map.getCoordinatesOfEntityType(Herbivore.class).isEmpty();
     }
 }
